@@ -2,7 +2,7 @@
 
 Aplicación móvil desarrollada por el **Grupo 10** para el proyecto FoodPlease, correspondiente a la asignatura **Taller de Desarrollo Web y Móvil – UNAB**.
 
-Esta versión representa un **Producto Mínimo Viable (MVP)** de la aplicación móvil propuesta para FoodPlease y complementa la plataforma web desarrollada previamente para la administración de restaurantes.
+Esta versión representa un **Producto Mínimo Viable (MVP)** que complementa la plataforma web desarrollada previamente para la administración de restaurantes.
 
 La aplicación fue desarrollada utilizando **React Native y Expo**, incorporando navegación entre vistas, autenticación demostrativa y diferenciación de funcionalidades según el perfil del usuario.
 
@@ -10,58 +10,11 @@ La aplicación fue desarrollada utilizando **React Native y Expo**, incorporando
 
 ## Descripción
 
-FoodPlease corresponde a una propuesta orientada a la gestión y utilización de servicios asociados a una cadena de restaurantes.
+FoodPlease es una aplicación móvil desarrollada como Producto Mínimo Viable (MVP) para representar las principales interacciones de los usuarios de la plataforma.
 
-La aplicación móvil considera tres perfiles de usuario:
+La solución considera tres perfiles: **Cliente, Administrador y Repartidor**, aplicando control de acceso para presentar únicamente las funcionalidades correspondientes a cada usuario.
 
-- **Cliente:** permite consultar los restaurantes disponibles y visualizar información detallada de cada establecimiento.
-- **Administrador:** permite administrar los restaurantes mediante operaciones de creación, consulta, modificación y eliminación.
-- **Repartidor:** dispone de una vista orientada a la consulta de entregas asignadas.
-
-Las funcionalidades disponibles cambian según el perfil autenticado, evitando que usuarios sin permisos administrativos accedan a operaciones de creación, edición o eliminación.
-
----
-
-## Funcionalidades implementadas
-
-### Autenticación
-
-La aplicación incorpora un mecanismo de autenticación demostrativo que permite identificar el perfil del usuario y presentar las funciones correspondientes.
-
-Para efectos del MVP, las credenciales se encuentran definidas localmente en la aplicación.
-
-### Perfil Cliente
-
-El cliente puede:
-
-- Iniciar y cerrar sesión.
-- Visualizar restaurantes disponibles.
-- Consultar información de cada restaurante.
-- Revisar dirección, horario, teléfono, categoría y descripción.
-- Acceder a la opción de menú desde el detalle del restaurante.
-
-### Perfil Administrador
-
-El administrador puede:
-
-- Iniciar y cerrar sesión.
-- Visualizar restaurantes registrados.
-- Consultar el detalle de un restaurante.
-- Crear nuevos restaurantes.
-- Editar restaurantes existentes.
-- Eliminar restaurantes previa confirmación.
-
-Las operaciones administrativas se encuentran disponibles exclusivamente para este perfil.
-
-### Perfil Repartidor
-
-El repartidor puede:
-
-- Iniciar y cerrar sesión.
-- Consultar las entregas asignadas.
-- Visualizar el restaurante asociado.
-- Consultar cliente y dirección de entrega.
-- Visualizar el estado de cada pedido.
+En esta versión los datos son locales y tienen fines demostrativos. La integración con el backend desarrollado mediante Django y PostgreSQL se contempla como evolución de la solución.
 
 ---
 
@@ -83,15 +36,15 @@ Para ejecutar el proyecto se requiere:
 - **Node.js**
 - **npm**
 - Navegador web actualizado para ejecución web.
-- **Expo Go** en un dispositivo móvil Android o iOS para pruebas desde un dispositivo físico.
+- **Expo Go** en un dispositivo Android o iOS para pruebas desde un dispositivo físico.
 
-Las dependencias específicas utilizadas por el proyecto se encuentran definidas en:
+Las dependencias utilizadas por el proyecto se encuentran definidas en:
 
 ```text
 package.json
 ```
 
-y sus versiones instaladas se encuentran registradas en:
+Las versiones instaladas se encuentran registradas en:
 
 ```text
 package-lock.json
@@ -131,7 +84,7 @@ npx expo start
 
 Expo iniciará Metro Bundler y mostrará un código QR.
 
-Para probar la aplicación desde un dispositivo móvil se puede escanear el código QR utilizando **Expo Go**, siempre que el computador y el dispositivo se encuentren en una red compatible.
+Para probar la aplicación desde un dispositivo móvil, se puede escanear el código QR utilizando **Expo Go**.
 
 ### Ejecutar versión web
 
@@ -180,8 +133,75 @@ La aplicación diferencia las funcionalidades disponibles según el perfil auten
 | Consultar entregas | — | — | ✓ |
 | Cerrar sesión | ✓ | ✓ | ✓ |
 
-Durante las pruebas funcionales se verificó que cada perfil accede solamente a las funcionalidades que le corresponden.
+Las pruebas funcionales permitieron verificar que cada perfil accede únicamente a las funcionalidades correspondientes a su rol.
 
+---
+
+## Navegación por perfiles
+
+La navegación se adapta al perfil autenticado, presentando únicamente las vistas y operaciones correspondientes a cada usuario.
+
+```text
+Inicio de sesión
+       │
+       ├── Cliente
+       │     └── Restaurantes
+       │           └── Detalle del restaurante
+       │                 └── Ver menú (proyectado)
+       │
+       ├── Administrador
+       │     └── Gestión de restaurantes
+       │           ├── Consultar
+       │           ├── Crear
+       │           ├── Editar
+       │           └── Eliminar
+       │
+       └── Repartidor
+             └── Entregas asignadas
+                   └── Detalle de entrega
+```
+
+## Funcionalidades por perfil
+
+El MVP incorpora funcionalidades diferenciadas según el perfil autenticado. La implementación actual permite validar la navegación y las principales interacciones de cada usuario, utilizando datos locales de demostración.
+
+### Cliente
+
+Funcionalidades disponibles:
+
+- Inicio y cierre de sesión.
+- Visualización de restaurantes disponibles.
+- Consulta del detalle de cada restaurante.
+- Visualización de dirección, horario, teléfono, categoría y descripción.
+- Acceso desde el detalle a la opción de menú.
+
+**Estado actual:** la consulta de restaurantes y sus detalles se encuentra disponible. La gestión completa de menús, selección de productos y generación de pedidos se contempla para una siguiente iteración.
+
+### Administrador
+
+Funcionalidades disponibles:
+
+- Inicio y cierre de sesión.
+- Visualización y consulta de restaurantes.
+- Creación de nuevos restaurantes.
+- Edición de restaurantes existentes.
+- Eliminación de restaurantes previa confirmación.
+
+**Estado actual:** las operaciones CRUD se encuentran disponibles en el MVP y restringidas al perfil Administrador. Los cambios operan sobre datos locales y todavía no poseen persistencia permanente en el backend.
+
+### Repartidor
+
+Funcionalidades disponibles:
+
+- Inicio y cierre de sesión.
+- Consulta de entregas asignadas.
+- Visualización del restaurante asociado.
+- Consulta de cliente y dirección de entrega.
+- Visualización del estado del pedido.
+
+**Estado actual:** la vista de entregas permite demostrar el flujo definido para el Repartidor. La actualización de estados, seguimiento y sincronización de entregas con el backend corresponden a futuras iteraciones.
+
+> **Alcance del MVP:** la autenticación, usuarios, restaurantes y entregas utilizados actualmente tienen fines demostrativos y se gestionan localmente. La integración con Django y PostgreSQL mediante una API REST corresponde a la siguiente etapa de evolución de FoodPlease.
 ---
 
 ## Estructura principal
@@ -206,47 +226,31 @@ app_grupo10/
 
 ### Archivos principales
 
-**`App.js`**
+**`App.js`**  
+Contiene la implementación principal del MVP, incluyendo vistas, navegación, perfiles, control de acceso y operaciones disponibles.
 
-Contiene la implementación principal del MVP, incluyendo las vistas, navegación, perfiles de usuario, control de acceso y operaciones disponibles.
-
-**`index.js`**
-
+**`index.js`**  
 Punto de entrada utilizado para registrar e iniciar la aplicación React Native.
 
-**`app.json`**
-
+**`app.json`**  
 Contiene la configuración general utilizada por Expo.
 
-**`package.json`**
-
+**`package.json`**  
 Define las dependencias y scripts necesarios para instalar y ejecutar el proyecto.
 
-**`package-lock.json`**
-
+**`package-lock.json`**  
 Mantiene las versiones exactas de las dependencias instaladas para facilitar la reproducción del ambiente.
 
-**`assets/`**
-
-Contiene los recursos gráficos utilizados por la configuración de la aplicación.
-
----
-
-## Alcance actual del MVP
-
-La versión actual permite demostrar la estructura y navegación de la aplicación móvil FoodPlease, incluyendo la diferenciación funcional entre cliente, administrador y repartidor.
-
-Los restaurantes, usuarios y entregas utilizados en esta etapa corresponden a información local de demostración almacenada durante la ejecución de la aplicación.
-
-Por lo tanto, las modificaciones realizadas mediante las operaciones CRUD del administrador se mantienen durante la sesión actual y no representan todavía persistencia permanente en una base de datos.
+**`assets/`**  
+Contiene los recursos gráficos utilizados por la aplicación.
 
 ---
 
 ## Integración propuesta con la plataforma web
 
-La plataforma web desarrollada previamente utiliza **Django y PostgreSQL** para la administración y persistencia de la información.
+La plataforma web desarrollada previamente utiliza **Django y PostgreSQL** para la administración y persistencia de información.
 
-Como evolución de la solución, se propone integrar la aplicación móvil con este backend mediante servicios API REST:
+Como evolución de FoodPlease, se propone integrar la aplicación móvil con este backend mediante servicios **API REST**, permitiendo intercambiar información mediante HTTP y JSON.
 
 ```text
 Aplicación móvil
@@ -264,31 +268,37 @@ React Native / Expo
     PostgreSQL
 ```
 
-Esta arquitectura permitirá que la aplicación móvil consuma la misma información administrada desde la plataforma web, manteniendo PostgreSQL como fuente centralizada de datos.
+Esta arquitectura permitirá que la aplicación móvil consuma la información administrada por el backend, manteniendo PostgreSQL como fuente centralizada de datos y separando la interfaz móvil de la lógica y persistencia de la solución.
 
 ---
 
-## Consideraciones
+## Alcance y evolución
 
-La aplicación corresponde a una versión mínimamente viable desarrollada con fines académicos.
+La versión actual permite demostrar la navegación, diferenciación de perfiles y funcionalidades principales de FoodPlease.
 
-En futuras iteraciones se contempla:
+Los usuarios, restaurantes y entregas corresponden a **datos locales de demostración**, por lo que las modificaciones realizadas durante la ejecución no poseen todavía persistencia permanente.
 
-- Integración real con el backend Django.
-- Persistencia de información mediante PostgreSQL.
-- Autenticación mediante API.
-- Gestión de productos y menús.
-- Generación y seguimiento de pedidos.
-- Gestión completa de entregas para repartidores.
-- Persistencia de favoritos y preferencias del cliente.
-- Mejoras adicionales de navegación y experiencia de usuario.
+Como evolución del proyecto se contempla:
+
+- Integrar la aplicación móvil con Django mediante API REST.
+- Incorporar persistencia mediante PostgreSQL.
+- Implementar autenticación mediante backend.
+- Incorporar gestión completa de productos y menús.
+- Implementar generación y seguimiento de pedidos.
+- Ampliar la gestión de entregas para repartidores.
 
 ---
 
-## Grupo 10
+## Integrantes – Grupo 10
 
-Proyecto desarrollado para la asignatura:
+Proyecto desarrollado de manera colaborativa por el **Grupo 10** para la asignatura **Taller de Desarrollo Web y Móvil** de la Universidad Andrés Bello.
 
-**Taller de Desarrollo Web y Móvil**  
+| Integrante |
+|---|
+| Matias Lillo |
+| Eduardo Jaque |
+| Gabriel Jara |
+
 **Universidad Andrés Bello – UNAB**  
+**Taller de Desarrollo Web y Móvil**  
 **2026**
