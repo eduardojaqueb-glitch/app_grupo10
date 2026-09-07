@@ -57,7 +57,7 @@ package-lock.json
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/eduardojaqueb-glitch/app_grupo10.git
+git clone https://gitlab.com/Kratz96/proyecto_g10.git
 ```
 
 ### 2. Ingresar al directorio
@@ -127,10 +127,15 @@ La aplicación diferencia las funcionalidades disponibles según el perfil auten
 | Iniciar sesión | ✓ | ✓ | ✓ |
 | Consultar restaurantes | ✓ | ✓ | — |
 | Consultar detalle | ✓ | ✓ | — |
+| Buscar restaurantes | ✓ | — | — |
+| Gestionar favoritos | ✓ | — | — |
+| Consultar menú y carrito | ✓ | — | — |
+| Confirmar pedidos | ✓ | — | — |
 | Crear restaurante | — | ✓ | — |
 | Editar restaurante | — | ✓ | — |
 | Eliminar restaurante | — | ✓ | — |
 | Consultar entregas | — | — | ✓ |
+| Actualizar estado de entrega | — | — | ✓ |
 | Cerrar sesión | ✓ | ✓ | ✓ |
 
 Las pruebas funcionales permitieron verificar que cada perfil accede únicamente a las funcionalidades correspondientes a su rol.
@@ -147,7 +152,9 @@ Inicio de sesión
        ├── Cliente
        │     └── Restaurantes
        │           └── Detalle del restaurante
-       │                 └── Ver menú (proyectado)
+       │                 └── Ver menú
+       │                       └── Carrito
+       │                             └── Confirmar pedido
        │
        ├── Administrador
        │     └── Gestión de restaurantes
@@ -159,6 +166,7 @@ Inicio de sesión
        └── Repartidor
              └── Entregas asignadas
                    └── Detalle de entrega
+                         └── Actualizar estado
 ```
 
 ## Funcionalidades por perfil
@@ -173,9 +181,13 @@ Funcionalidades disponibles:
 - Visualización de restaurantes disponibles.
 - Consulta del detalle de cada restaurante.
 - Visualización de dirección, horario, teléfono, categoría y descripción.
-- Acceso desde el detalle a la opción de menú.
+- Búsqueda por nombre, categoría o dirección.
+- Gestión de restaurantes favoritos.
+- Consulta del menú de cada restaurante.
+- Gestión de productos en el carrito.
+- Confirmación y consulta de pedidos recientes.
 
-**Estado actual:** la consulta de restaurantes y sus detalles se encuentra disponible. La gestión completa de menús, selección de productos y generación de pedidos se contempla para una siguiente iteración.
+**Estado actual:** el flujo de cliente se encuentra disponible de extremo a extremo con datos locales: búsqueda, selección del restaurante, menú, carrito y confirmación del pedido.
 
 ### Administrador
 
@@ -198,8 +210,10 @@ Funcionalidades disponibles:
 - Visualización del restaurante asociado.
 - Consulta de cliente y dirección de entrega.
 - Visualización del estado del pedido.
+- Acceso al detalle de cada entrega.
+- Actualización progresiva del estado hasta completar la entrega.
 
-**Estado actual:** la vista de entregas permite demostrar el flujo definido para el Repartidor. La actualización de estados, seguimiento y sincronización de entregas con el backend corresponden a futuras iteraciones.
+**Estado actual:** la vista de entregas permite consultar el detalle y actualizar los estados En preparación, Listo para retirar, En camino y Entregado. La sincronización con el backend corresponde a una futura iteración.
 
 > **Alcance del MVP:** la autenticación, usuarios, restaurantes y entregas utilizados actualmente tienen fines demostrativos y se gestionan localmente. La integración con Django y PostgreSQL mediante una API REST corresponde a la siguiente etapa de evolución de FoodPlease.
 ---
@@ -216,7 +230,7 @@ app_grupo10/
 │   └── splash-icon.png
 │
 ├── .gitignore
-├── App.js
+├── app.js
 ├── app.json
 ├── index.js
 ├── package.json
@@ -226,7 +240,7 @@ app_grupo10/
 
 ### Archivos principales
 
-**`App.js`**  
+**`app.js`**
 Contiene la implementación principal del MVP, incluyendo vistas, navegación, perfiles, control de acceso y operaciones disponibles.
 
 **`index.js`**  
