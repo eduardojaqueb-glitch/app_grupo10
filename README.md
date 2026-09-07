@@ -264,13 +264,13 @@ Contiene los recursos gráficos utilizados por la aplicación.
 
 La plataforma web desarrollada previamente utiliza **Django y PostgreSQL** para la administración y persistencia de información.
 
-Como evolución de FoodPlease, se propone integrar la aplicación móvil con este backend mediante servicios **API REST**, permitiendo intercambiar información mediante HTTP y JSON.
+Como evolución de FoodPlease, se propone integrar la aplicación móvil con este backend mediante servicios **API REST**, permitiendo intercambiar información mediante HTTPS y JSON.
 
 ```text
 Aplicación móvil
 React Native / Expo
         │
-        │ HTTP / JSON
+        │ HTTPS / JSON
         ▼
      API REST
        Django
